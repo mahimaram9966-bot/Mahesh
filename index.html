@@ -49,7 +49,6 @@
       border-radius: 100px;
       cursor: pointer;
       box-shadow: 0 15px 30px rgba(255, 51, 102, 0.5);
-      transition: transform 0.3s;
     }
 
     .no-btn {
@@ -61,6 +60,7 @@
       border-radius: 25px;
       cursor: pointer;
       position: relative;
+      transition: transform 0.15s ease;
     }
 
     .heart {
@@ -115,15 +115,13 @@
       const noBtn = document.getElementById("no");
       const msg = document.getElementById("message");
 
-      const x = Math.random() * 120 - 60;
-      const y = Math.random() * 40 - 20;
+      // SMALL, CONTROLLED movement (never too far)
+      const x = Math.random() * 40 - 20; // -20 to +20 px
+      const y = Math.random() * 20 - 10; // -10 to +10 px
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
       msg.innerText = noMessages[noIndex % noMessages.length];
       noIndex++;
-
-      document.getElementById("yes").style.transform =
-        `scale(${1 + noIndex * 0.04})`;
     }
 
     function sayYes() {
@@ -132,7 +130,7 @@
       msg.innerText =
         "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
 
-      // YES disappears, NO stays visible
+      // YES hides, NO stays
       document.getElementById("yes").style.display = "none";
 
       if (!heartsStarted) {
@@ -152,7 +150,7 @@
         document.body.appendChild(heart);
 
         setTimeout(() => heart.remove(), 6000);
-      }, 350);
+      }, 400);
     }
   </script>
 
