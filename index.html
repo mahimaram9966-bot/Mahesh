@@ -54,7 +54,7 @@
 
     #no {
       background: #ddd;
-      position: relative;
+      position: absolute;
     }
 
     #message {
@@ -92,7 +92,7 @@
   </div>
 
   <script>
-    let noMessages = [
+    const noMessages = [
       "Nice try 😏",
       "Still thinking? 😌",
       "Come on… you know you want to 💕",
@@ -101,21 +101,21 @@
     ];
 
     let noCount = 0;
+    let heartsStarted = false;
 
     function moveNo() {
       const btn = document.getElementById("no");
 
       const x = Math.random() * 300 - 150;
       const y = Math.random() * 200 - 100;
-      btn.style.transform = `translate(${x}px, ${y}px)`;
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
 
       btn.innerText = noMessages[noCount % noMessages.length];
       noCount++;
 
-      // Make YES grow slowly
       const yesBtn = document.getElementById("yes");
-      let scale = 1 + noCount * 0.05;
-      yesBtn.style.transform = `scale(${scale})`;
+      yesBtn.style.transform = `scale(${1 + noCount * 0.05})`;
     }
 
     function sayYes() {
@@ -124,7 +124,10 @@
 
       document.getElementById("no").style.display = "none";
 
-      startHearts();
+      if (!heartsStarted) {
+        heartsStarted = true;
+        startHearts();
+      }
     }
 
     function startHearts() {
@@ -143,6 +146,3 @@
 
 </body>
 </html>
-
-
-
