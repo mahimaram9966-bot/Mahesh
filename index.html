@@ -29,7 +29,15 @@
     h1 {
       color: #ff3366;
       font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    #message {
       margin-bottom: 25px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff3366;
+      min-height: 40px;
     }
 
     .yes-btn {
@@ -44,10 +52,6 @@
       transition: transform 0.3s;
     }
 
-    .yes-btn:hover {
-      transform: scale(1.08);
-    }
-
     .no-btn {
       margin-top: 25px;
       background: #eee;
@@ -57,16 +61,6 @@
       border-radius: 25px;
       cursor: pointer;
       position: relative;
-    }
-
-    #message {
-      margin-bottom: 25px;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #ff3366;
-      min-height: 50px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
     }
 
     .heart {
@@ -90,7 +84,6 @@
   <div class="card">
     <h1>Hey Cutie 🥰💖</h1>
 
-    <!-- MESSAGE SHOWN HERE -->
     <div id="message"></div>
 
     <button class="yes-btn" id="yes" onclick="sayYes()">
@@ -116,32 +109,21 @@
     ];
 
     let noIndex = 0;
-    let noTimer = null;
     let heartsStarted = false;
 
     function handleNo() {
       const noBtn = document.getElementById("no");
+      const msg = document.getElementById("message");
 
-      // playful small movement
       const x = Math.random() * 120 - 60;
       const y = Math.random() * 40 - 20;
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-      // delay message by 5 seconds
-      if (noTimer) return;
+      msg.innerText = noMessages[noIndex % noMessages.length];
+      noIndex++;
 
-      noTimer = setTimeout(() => {
-        const msg = document.getElementById("message");
-        msg.innerText = noMessages[noIndex % noMessages.length];
-        msg.style.opacity = 1;
-
-        noIndex++;
-        noTimer = null;
-
-        // YES grows slowly
-        document.getElementById("yes").style.transform =
-          `scale(${1 + noIndex * 0.04})`;
-      }, 5000);
+      document.getElementById("yes").style.transform =
+        `scale(${1 + noIndex * 0.04})`;
     }
 
     function sayYes() {
@@ -149,9 +131,8 @@
 
       msg.innerText =
         "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
-      msg.style.opacity = 1;
 
-      document.getElementById("no").style.display = "none";
+      // YES disappears, NO stays visible
       document.getElementById("yes").style.display = "none";
 
       if (!heartsStarted) {
@@ -177,4 +158,3 @@
 
 </body>
 </html>
-
