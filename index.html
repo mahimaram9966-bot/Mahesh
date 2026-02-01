@@ -23,7 +23,7 @@
       text-align: center;
       box-shadow: 0 25px 50px rgba(0,0,0,0.25);
       max-width: 420px;
-      z-index: 2;
+      position: relative;
     }
 
     h1 {
@@ -54,7 +54,7 @@
 
     #no {
       background: #ddd;
-      position: absolute;
+      position: relative;
     }
 
     #message {
@@ -62,6 +62,7 @@
       font-size: 1.3rem;
       font-weight: bold;
       color: #ff3366;
+      min-height: 30px;
     }
 
     .heart {
@@ -96,22 +97,29 @@
       "Nice try 😏",
       "Still thinking? 😌",
       "Come on… you know you want to 💕",
-      "That button is just for decoration 😄",
-      "Okay now you’re just teasing 😜"
+      "That button is broken on purpose 😄",
+      "Okay now you’re just teasing 😜",
+      "Try in next life 😌",
+      "Seriously? 😐",
+      "Ayyo enduku ala? 😅",
+      "Ilaa chesthe kastam amma 😆",
+      "Ala kaadu… Yes cheyyali 💖",
+      "Think chesi cheppu Cutie 😉"
     ];
 
     let noCount = 0;
     let heartsStarted = false;
 
     function moveNo() {
-      const btn = document.getElementById("no");
+      const noBtn = document.getElementById("no");
+      const msg = document.getElementById("message");
 
-      const x = Math.random() * 300 - 150;
-      const y = Math.random() * 200 - 100;
-      btn.style.left = x + "px";
-      btn.style.top = y + "px";
+      // Safe playful movement
+      const x = Math.random() * 120 - 60;
+      const y = Math.random() * 60 - 30;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-      btn.innerText = noMessages[noCount % noMessages.length];
+      msg.innerText = noMessages[noCount % noMessages.length];
       noCount++;
 
       const yesBtn = document.getElementById("yes");
@@ -119,7 +127,7 @@
     }
 
     function sayYes() {
-      document.getElementById("message").innerHTML =
+      document.getElementById("message").innerText =
         "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
 
       document.getElementById("no").style.display = "none";
@@ -140,7 +148,7 @@
         document.body.appendChild(heart);
 
         setTimeout(() => heart.remove(), 6000);
-      }, 300);
+      }, 350);
     }
   </script>
 
