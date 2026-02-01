@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Be My Valentine 💘</title>
+  <title>Just One Question 💖</title>
+
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -51,17 +52,13 @@
       color: white;
     }
 
-    #yes:hover {
-      transform: scale(1.15);
-    }
-
     #no {
       background: #ddd;
       position: relative;
     }
 
     #message {
-      margin-top: 20px;
+      margin-top: 25px;
       font-size: 1.3rem;
       font-weight: bold;
       color: #ff3366;
@@ -81,6 +78,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="card">
@@ -94,35 +92,57 @@
   </div>
 
   <script>
-    function sayYes() {
-      document.getElementById("message").innerHTML =
-  "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
-    }
+    let noMessages = [
+      "Nice try 😏",
+      "Still thinking? 😌",
+      "Come on… you know you want to 💕",
+      "That button is just for decoration 😄",
+      "Okay now you’re just teasing 😜"
+    ];
+
+    let noCount = 0;
 
     function moveNo() {
       const btn = document.getElementById("no");
+
       const x = Math.random() * 300 - 150;
       const y = Math.random() * 200 - 100;
       btn.style.transform = `translate(${x}px, ${y}px)`;
+
+      btn.innerText = noMessages[noCount % noMessages.length];
+      noCount++;
+
+      // Make YES grow slowly
+      const yesBtn = document.getElementById("yes");
+      let scale = 1 + noCount * 0.05;
+      yesBtn.style.transform = `scale(${scale})`;
     }
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-      document.body.appendChild(heart);
+    function sayYes() {
+      document.getElementById("message").innerHTML =
+        "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
+      document.getElementById("no").style.display = "none";
+
+      startHearts();
     }
 
-    setInterval(createHeart, 400);
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    }
   </script>
 
 </body>
 </html>
+
 
 
