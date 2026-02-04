@@ -23,6 +23,7 @@ body {
   text-align: center;
   box-shadow: 0 30px 60px rgba(0,0,0,0.25);
   width: 420px;
+  position: relative;
 }
 
 h1 {
@@ -32,10 +33,14 @@ h1 {
 
 #message {
   margin: 20px 0;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #ff3366;
-  min-height: 40px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 button {
@@ -61,8 +66,8 @@ button {
 }
 
 #loveImg {
-  margin-top: 20px;
-  width: 220px;
+  margin-top: 15px;
+  width: 180px;
   display: none;
   border-radius: 20px;
 }
@@ -79,7 +84,8 @@ button {
   <br><br>
   <button class="no-btn" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No 🙈</button>
 
-  <img id="loveImg" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+  <!-- Cute teddy love gif -->
+  <img id="loveImg" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 </div>
 
 <script>
@@ -89,11 +95,8 @@ function moveNo() {
   const maxX = window.innerWidth - btn.offsetWidth - 20;
   const maxY = window.innerHeight - btn.offsetHeight - 20;
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
+  btn.style.left = Math.random() * maxX + "px";
+  btn.style.top = Math.random() * maxY + "px";
 }
 
 function sayYes() {
@@ -108,4 +111,3 @@ function sayYes() {
 
 </body>
 </html>
-
