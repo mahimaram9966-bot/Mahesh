@@ -1,158 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Just One Question 💖</title>
+<meta charset="UTF-8" />
+<title>Valentine 💖</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffb6b9, #fad0c4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Segoe UI", sans-serif;
-      overflow: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffb6b9, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+  overflow: hidden;
+}
 
-    .card {
-      background: white;
-      padding: 50px 40px;
-      border-radius: 30px;
-      text-align: center;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-      width: 420px;
-      position: relative;
-    }
+.card {
+  background: white;
+  padding: 50px 40px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+  width: 420px;
+}
 
-    h1 {
-      color: #ff3366;
-      font-size: 2.4rem;
-      margin-bottom: 20px;
-    }
+h1 {
+  color: #ff3366;
+  font-size: 2rem;
+}
 
-    #message {
-      margin-bottom: 25px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ff3366;
-      min-height: 40px;
-    }
+#message {
+  margin: 20px 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff3366;
+  min-height: 40px;
+}
 
-    .yes-btn {
-      background: #ff3366;
-      color: white;
-      border: none;
-      font-size: 2rem;
-      padding: 35px 80px;
-      border-radius: 100px;
-      cursor: pointer;
-      box-shadow: 0 15px 30px rgba(255, 51, 102, 0.5);
-    }
+button {
+  border: none;
+  cursor: pointer;
+}
 
-    .no-btn {
-      margin-top: 25px;
-      background: #eee;
-      border: none;
-      font-size: 1rem;
-      padding: 10px 25px;
-      border-radius: 25px;
-      cursor: pointer;
-      position: relative;
-      transition: transform 0.15s ease;
-    }
+.yes-btn {
+  background: #ff3366;
+  color: white;
+  font-size: 2rem;
+  padding: 30px 70px;
+  border-radius: 100px;
+  box-shadow: 0 15px 30px rgba(255, 51, 102, 0.5);
+}
 
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 22px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.8;
-      pointer-events: none;
-    }
+.no-btn {
+  position: absolute;
+  background: #eee;
+  font-size: 1rem;
+  padding: 10px 25px;
+  border-radius: 25px;
+}
 
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-110vh); opacity: 0; }
-    }
-  </style>
+#loveImg {
+  margin-top: 20px;
+  width: 220px;
+  display: none;
+  border-radius: 20px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>Hey Cutie 🥰💖</h1>
+<div class="card">
+  <h1>Hey cutie will you be my Valentine 💖</h1>
+  <div id="message"></div>
 
-    <div id="message"></div>
+  <button class="yes-btn" onclick="sayYes()">Yes 💘</button>
+  <br><br>
+  <button class="no-btn" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No 🙈</button>
 
-    <button class="yes-btn" id="yes" onclick="sayYes()">
-      Yes 💘
-    </button>
+  <img id="loveImg" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+</div>
 
-    <br />
+<script>
+function moveNo() {
+  const btn = document.getElementById("noBtn");
 
-    <button class="no-btn" id="no" onmouseover="handleNo()">
-      No 🙈
-    </button>
-  </div>
+  const maxX = window.innerWidth - btn.offsetWidth - 20;
+  const maxY = window.innerHeight - btn.offsetHeight - 20;
 
-  <script>
-    const noMessages = [
-      "Nice try 😏",
-      "Still thinking? 😌",
-      "Try in next life 😄",
-      "Seriously? 😐",
-      "Ayyo enduku ala? 😅",
-      "Ilaa chesthe kastam amma 😆",
-      "Ala kaadu… Yes cheyyali 💖"
-    ];
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
-    let noIndex = 0;
-    let heartsStarted = false;
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
 
-    function handleNo() {
-      const noBtn = document.getElementById("no");
-      const msg = document.getElementById("message");
+function sayYes() {
+  document.getElementById("message").innerText =
+    "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
 
-      // SMALL, CONTROLLED movement (never too far)
-      const x = Math.random() * 40 - 20; // -20 to +20 px
-      const y = Math.random() * 20 - 10; // -10 to +10 px
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
-
-      msg.innerText = noMessages[noIndex % noMessages.length];
-      noIndex++;
-    }
-
-    function sayYes() {
-      const msg = document.getElementById("message");
-
-      msg.innerText =
-        "YAYYY!! 💕😍 See you on the 14th, Cutie 💖🌹";
-
-      // YES hides, NO stays
-      document.getElementById("yes").style.display = "none";
-
-      if (!heartsStarted) {
-        heartsStarted = true;
-        startHearts();
-      }
-    }
-
-    function startHearts() {
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration =
-          (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 6000);
-      }, 400);
-    }
-  </script>
+  document.querySelector(".yes-btn").style.display = "none";
+  document.getElementById("noBtn").style.display = "none";
+  document.getElementById("loveImg").style.display = "block";
+}
+</script>
 
 </body>
 </html>
+
